@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070a13">
+  <meta name="description" content="8D Aura is a Windows app for real-time spatial audio. Move your system audio around a glowing 360-degree sound field.">
+  <title>8D Aura — Hear beyond borders</title>
+  <link rel="icon" type="image/png" href="assets/8d-aura-logo.png">
+  <style>
+    :root{color-scheme:dark;--bg:#070a13;--panel:#101726;--panel2:#0c1320;--line:rgba(150,190,255,.14);--text:#f4f7ff;--muted:#a4b1c8;--blue:#62b8ff;--cyan:#38e1ef;--violet:#9674ff;--max:1180px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 78% 11%,rgba(61,87,202,.15),transparent 38%),radial-gradient(ellipse at 13% 45%,rgba(25,140,190,.08),transparent 35%),#070a13}
+    a{color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin-inline:auto}
+    .topbar{height:86px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(177,203,255,.09)}
+    .brand{display:flex;gap:12px;align-items:center;text-decoration:none}
+    .brand img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 0 15px rgba(49,153,255,.34))}
+    .brand-name{font-size:15px;font-weight:750;letter-spacing:.18em}
+    .brand-kicker{font-size:9px;letter-spacing:.19em;color:#8798b7;margin-top:1px}
+    .top-note{font-size:11px;color:#90a4c5;letter-spacing:.13em;text-transform:uppercase}
+    .hero{position:relative;min-height:640px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;isolation:isolate;overflow:hidden;border:1px solid rgba(85,160,255,.22);border-radius:30px;margin-top:28px;background:linear-gradient(112deg,#0d1422 0%,rgba(10,17,31,.97) 39%,rgba(8,13,25,.65) 100%);box-shadow:0 28px 100px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.035)}
+    .hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#0c1320 0%,rgba(9,15,28,.96) 38%,rgba(8,13,25,.40) 100%),linear-gradient(0deg,rgba(7,10,19,.44),transparent 52%)}
+    .hero-photo{position:absolute;inset:0 0 0 28%;z-index:-2;width:72%;height:100%;object-fit:cover;object-position:center;opacity:.52;filter:saturate(.9) contrast(1.08)}
+    .hero-copy{position:relative;z-index:2;padding:72px 0 76px 68px;max-width:610px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(100,186,255,.25);background:rgba(27,59,95,.27);color:#9bd6ff;border-radius:999px;padding:7px 12px;font-size:10px;letter-spacing:.17em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+    h1{font-size:clamp(48px,7vw,82px);line-height:.98;letter-spacing:-.065em;margin:25px 0 20px;font-weight:680}
+    h1 span{display:block;background:linear-gradient(100deg,#fff 5%,#9fe9ff 45%,#a994ff 89%);color:transparent;background-clip:text;-webkit-background-clip:text}
+    .hero-copy p{font-size:17px;line-height:1.7;color:#bac7db;max-width:490px;margin:0 0 27px}
+    .actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+    .download{display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:54px;padding:0 24px;border-radius:14px;text-decoration:none;font-size:14px;font-weight:700;color:#04111e;background:linear-gradient(105deg,#4ae1e8,#82a6ff 58%,#b18aff);box-shadow:0 12px 34px rgba(69,162,255,.24),inset 0 1px 0 rgba(255,255,255,.55);transition:transform .2s ease,box-shadow .2s ease}
+    .download:hover{transform:translateY(-2px);box-shadow:0 17px 40px rgba(69,162,255,.35),inset 0 1px 0 rgba(255,255,255,.55)}
+    .download svg{width:17px;height:17px}
+    .platform{font-size:11px;color:#97a9c4}
+    .platform strong{color:#dfeaff;font-weight:600}
+    .hero-footnote{margin-top:18px!important;font-size:11px!important;color:#8193ae!important}
+    .orb-stage{position:relative;justify-self:center;width:min(35vw,420px);aspect-ratio:1;margin:28px 48px 28px 0;display:grid;place-items:center;filter:drop-shadow(0 0 55px rgba(65,93,255,.12))}
+    .orb-stage:before{content:"";position:absolute;inset:10%;border-radius:50%;background:radial-gradient(circle,rgba(44,157,255,.11),rgba(105,71,255,.06) 47%,transparent 72%);filter:blur(10px)}
+    .ring{position:absolute;border:1px solid rgba(99,155,255,.29);border-radius:50%;inset:3%;box-shadow:0 0 22px rgba(54,130,255,.07),inset 0 0 16px rgba(70,119,255,.035)}
+    .ring.r2{inset:13%;border-color:rgba(91,191,255,.24)}
+    .ring.r3{inset:25%;border-color:rgba(153,121,255,.32)}
+    .orbit{position:absolute;width:100%;height:43%;border:1px solid rgba(64,219,246,.72);border-radius:50%;transform:rotate(-31deg);box-shadow:0 0 18px rgba(49,199,255,.15)}
+    .orbit.o2{width:79%;height:108%;border-color:rgba(163,116,255,.53);transform:rotate(39deg)}
+    .orbit.o3{width:118%;height:34%;border-color:rgba(116,137,255,.42);transform:rotate(18deg)}
+    .source-dot{position:absolute;width:11px;height:11px;background:#b5f7ff;border:2px solid #fff;border-radius:50%;top:13%;left:57%;box-shadow:0 0 8px #80edff,0 0 23px #388fff,0 0 48px rgba(123,92,255,.8)}
+    .orb-core{position:relative;width:33%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(170,217,255,.9);background:radial-gradient(circle at 34% 27%,#b4f8ff 0,#5db8ff 9%,#405fe5 32%,#322276 65%,#13182d 100%);box-shadow:0 0 18px rgba(76,209,255,.72),0 0 58px rgba(84,83,255,.56),inset -13px -18px 30px rgba(5,10,32,.65),inset 8px 6px 20px rgba(207,246,255,.55)}
+    .orb-core:after{content:"";position:absolute;inset:18%;border:1px solid rgba(207,240,255,.57);border-radius:50%;box-shadow:0 0 23px rgba(65,208,255,.35)}
+    .orbit-caption{position:absolute;left:0;right:0;bottom:2%;display:flex;justify-content:space-between;color:#9ab5db;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+    .orbit-caption span:nth-child(2){color:#92e8fb}
+    .photo-credit{position:absolute;right:20px;bottom:15px;font-size:9px;color:rgba(229,237,255,.57);z-index:2}
+    .photo-credit a{text-decoration:underline;text-underline-offset:3px}
+    .section{padding:105px 0 0}
+    .section-heading{max-width:700px;margin-bottom:35px}
+    .section-label{font-size:10px;font-weight:650;letter-spacing:.18em;text-transform:uppercase;color:#74caff}
+    h2{font-size:clamp(31px,4vw,48px);line-height:1.08;letter-spacing:-.045em;margin:12px 0;color:#f2f6ff;font-weight:640}
+    .section-heading p{color:var(--muted);font-size:15px;max-width:620px;margin:0}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .feature{position:relative;overflow:hidden;min-height:205px;padding:25px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(19,29,47,.9),rgba(11,17,29,.94));box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+    .feature:after{content:"";position:absolute;width:130px;height:130px;right:-50px;top:-65px;border-radius:50%;background:rgba(70,116,255,.13);filter:blur(25px)}
+    .feature-number{display:block;font-size:10px;letter-spacing:.16em;color:#668fbd;margin-bottom:26px}
+    .feature h3{font-size:18px;margin:0 0 9px;letter-spacing:-.02em}
+    .feature p{font-size:13px;color:#9facbf;margin:0;max-width:320px}
+    .showcase{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .shot{padding:9px;border-radius:19px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(21,32,50,.9),rgba(10,15,25,.95));box-shadow:0 18px 60px rgba(0,0,0,.25)}
+    .shot img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid rgba(154,190,245,.12)}
+    .shot figcaption{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:13px 7px 6px;color:#d5e1f6;font-size:13px}
+    .shot figcaption span:last-child{color:#7388a6;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+    .setup{position:relative;display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;padding:42px;border:1px solid rgba(95,157,255,.2);border-radius:25px;background:radial-gradient(ellipse at 0 100%,rgba(29,122,172,.1),transparent 45%),linear-gradient(145deg,#101a2a,#0a101b 78%);overflow:hidden}
+    .setup:after{content:"";position:absolute;width:320px;height:320px;right:-180px;bottom:-200px;border-radius:50%;background:rgba(110,76,255,.13);filter:blur(30px)}
+    .setup-intro{position:relative;z-index:1}
+    .setup-intro h2{font-size:36px}
+    .setup-intro p{color:#9fadc1;font-size:14px}
+    .official-link{display:inline-flex;margin-top:13px;color:#90dcff;font-size:13px;font-weight:650;text-underline-offset:4px}
+    .steps{position:relative;z-index:1;display:grid;gap:10px}
+    .step{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:15px 17px;border:1px solid rgba(157,188,235,.1);border-radius:15px;background:rgba(255,255,255,.025)}
+    .step-no{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:rgba(55,160,229,.12);color:#83d9ff;font-size:11px;font-weight:700}
+    .step h3{font-size:13px;margin:2px 0 4px}
+    .step p{font-size:12px;color:#9caac0;margin:0}
+    .step code{font-family:Consolas,monospace;color:#b8dbff;background:rgba(109,151,221,.1);padding:2px 5px;border-radius:5px}
+    .note{margin-top:15px;color:#8292aa;font-size:11px}
+    .closing{margin:70px 0 24px;padding:25px 0;border-top:1px solid rgba(170,198,255,.1);display:flex;align-items:center;justify-content:space-between;gap:20px;color:#7888a2;font-size:11px}
+    .closing-brand{color:#d9e7ff;font-size:12px;font-weight:700;letter-spacing:.14em}
+    .closing-links{display:flex;gap:18px}
+    .closing-links a{color:#8aa1c1;text-decoration:none}
+    .closing-links a:hover{color:#c1e9ff}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;min-height:unset}.hero-copy{padding:58px 40px 10px}.orb-stage{width:min(66vw,390px);margin:10px auto 45px}.hero-photo{inset:20% 0 0 15%;width:85%;opacity:.32}.hero:after{background:linear-gradient(180deg,#0b1220 0%,rgba(8,13,25,.82) 58%,rgba(8,13,25,.62) 100%)}.feature-grid{grid-template-columns:1fr}.feature{min-height:unset}.setup{grid-template-columns:1fr;gap:25px}.setup-intro h2{max-width:500px}}
+    @media(max-width:620px){.wrap{width:min(100% - 28px,var(--max))}.topbar{height:70px}.brand img{width:36px;height:36px}.top-note{font-size:9px}.hero{margin-top:15px;border-radius:21px}.hero-copy{padding:45px 23px 4px}h1{font-size:52px}.hero-copy p{font-size:15px}.download{width:100%}.actions{align-items:stretch}.platform{padding-left:2px}.orb-stage{width:78vw;margin:8px auto 40px}.section{padding-top:72px}.section-heading{margin-bottom:22px}.showcase{grid-template-columns:1fr}.setup{padding:23px 17px;border-radius:19px}.setup-intro h2{font-size:31px}.closing{align-items:flex-start;flex-direction:column;margin-top:48px}.closing-links{gap:14px;flex-wrap:wrap}.photo-credit{right:12px;bottom:10px;font-size:8px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="8D Aura home">
+        <img src="assets/8d-aura-logo.png" alt="">
+        <span><span class="brand-name">8D AURA</span><span class="brand-kicker">REAL-TIME SPATIAL AUDIO</span></span>
+      </a>
+      <div class="top-note">Windows · Stereo headphones</div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img class="hero-photo" src="https://images.unsplash.com/photo-1718664485636-8bea561ed388?auto=format&amp;fit=crop&amp;fm=jpg&amp;w=2200&amp;q=85" alt="Blue-lit studio microphone and audio equipment">
+        <div class="hero-copy">
+          <span class="eyebrow">A new dimension for your music</span>
+          <h1 id="hero-title">Hear beyond <span>borders.</span></h1>
+          <p>Give your everyday listening a sense of motion. 8D Aura moves live Windows audio around a glowing spatial field, with controls made for your headphones.</p>
+          <div class="actions">
+            <a class="download" href="https://github.com/wadekarharshvardhan/8DAura/releases/latest/download/8DAura.exe" aria-label="Download 8D Aura for Windows x64">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Download 8D Aura
+            </a>
+            <span class="platform"><strong>Windows 10 / 11</strong><br>64-bit · Portable app</span>
+          </div>
+          <p class="hero-footnote">VB-CABLE is a separate Windows driver. Setup takes a few guided steps below.</p>
+        </div>
+        <div class="orb-stage" aria-hidden="true">
+          <div class="ring"></div><div class="ring r2"></div><div class="ring r3"></div>
+          <div class="orbit"></div><div class="orbit o2"></div><div class="orbit o3"></div>
+          <div class="source-dot"></div><div class="orb-core"></div>
+          <div class="orbit-caption"><span>Front</span><span>Sound in motion</span><span>Rear</span></div>
+        </div>
+        <div class="photo-credit">Studio photo by <a href="https://unsplash.com/id/foto/mikrofon-di-atas-dudukan-dengan-latar-belakang-biru-v2hcAGvDIC4" target="_blank" rel="noreferrer">BoliviaInteligente / Unsplash</a></div>
+      </section>
+
+      <section class="section" aria-labelledby="experience-title">
+        <div class="section-heading">
+          <span class="section-label">Made for listening</span>
+          <h2 id="experience-title">A little more space in your sound.</h2>
+          <p>Shape the movement, tune the tone, and settle into a listening space that fits the moment.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature"><span class="feature-number">01 / SPATIAL FIELD</span><h3>Move around the orbit</h3><p>Drag the source around the spatial field or let it travel continuously. Adjust orbit speed and effect blend as you listen.</p></article>
+          <article class="feature"><span class="feature-number">02 / YOUR SOUND</span><h3>Make the tone yours</h3><p>Use quick bass, mid, and treble controls, or shape ten frequency bands with the advanced equaliser.</p></article>
+          <article class="feature"><span class="feature-number">03 / LISTENING SPACE</span><h3>Choose your atmosphere</h3><p>Explore headphone, speaker, hall, and auditorium spaces with adjustable echo, reverb, stereo width, and Haas depth.</p></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="screens-title">
+        <div class="section-heading">
+          <span class="section-label">Inside 8D Aura</span>
+          <h2 id="screens-title">Designed around the sound.</h2>
+          <p>Keep the spatial field, listening controls, and equaliser close at hand.</p>
+        </div>
+        <div class="showcase">
+          <figure class="shot"><img src="images/8d-aura-spatial-audio.png" alt="8D Aura spatial audio screen with orbit field and listening controls" loading="lazy"><figcaption><span>Spatial Audio</span><span>Orbit · presets · live level</span></figcaption></figure>
+          <figure class="shot"><img src="images/equaliser-basic.png" alt="8D Aura equaliser showing bass, mid, and treble sliders" loading="lazy"><figcaption><span>Equaliser</span><span>Basic tone controls</span></figcaption></figure>
+        </div>
+      </section>
+
+      <section class="section" id="setup" aria-labelledby="setup-title">
+        <div class="setup">
+          <div class="setup-intro">
+            <span class="section-label">First-time setup</span>
+            <h2 id="setup-title">Connect your Windows audio.</h2>
+            <p>VB-CABLE creates the virtual audio route 8D Aura listens to. Download it from the official VB-Audio site, then connect it to your headphones in the app.</p>
+            <a class="official-link" href="https://vb-audio.com/Cable/" target="_blank" rel="noreferrer">Get VB-CABLE from VB-Audio ↗</a>
+            <p class="note">The driver installer needs administrator approval. 8D Aura does not install drivers automatically.</p>
+          </div>
+          <div class="steps">
+            <article class="step"><span class="step-no">01</span><div><h3>Download and extract</h3><p>On the official page, download the Windows VB-CABLE driver ZIP and extract it into a folder.</p></div></article>
+            <article class="step"><span class="step-no">02</span><div><h3>Install the audio driver</h3><p>In the extracted folder, right-click <code>VBCABLE_Setup_x64.exe</code>, choose <strong>Run as administrator</strong>, then follow the installer. Restart Windows after installation.</p></div></article>
+            <article class="step"><span class="step-no">03</span><div><h3>Route Windows audio through the cable</h3><p>In Windows <strong>Settings → System → Sound</strong>, set the output device to <strong>CABLE Input (VB-Audio Virtual Cable)</strong>.</p></div></article>
+            <article class="step"><span class="step-no">04</span><div><h3>Choose your headphones in 8D Aura</h3><p>Open 8D Aura. Set <strong>Capture from</strong> to CABLE Input and <strong>Output to</strong> to your headphones or earbuds. Press <strong>Start real-time 8D</strong>.</p></div></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="closing">
+      <span><span class="closing-brand">8D AURA</span><br>Real-time spatial audio for Windows</span>
+      <span>Spatial audio is a binaural approximation, not a measured HRTF renderer.</span>
+      <nav class="closing-links" aria-label="Project links"><a href="https://github.com/wadekarharshvardhan/8DAura" target="_blank" rel="noreferrer">GitHub source</a><a href="https://vb-audio.com/Cable/" target="_blank" rel="noreferrer">VB-Audio</a><span>Photo: BoliviaInteligente / Unsplash</span></nav>
+    </footer>
+  </div>
+</body>
+</html>
