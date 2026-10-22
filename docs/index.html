@@ -42,11 +42,14 @@
     .ring{position:absolute;border:1px solid rgba(99,155,255,.29);border-radius:50%;inset:3%;box-shadow:0 0 22px rgba(54,130,255,.07),inset 0 0 16px rgba(70,119,255,.035)}
     .ring.r2{inset:13%;border-color:rgba(91,191,255,.24)}
     .ring.r3{inset:25%;border-color:rgba(153,121,255,.32)}
-    .orbit{position:absolute;width:100%;height:43%;border:1px solid rgba(64,219,246,.72);border-radius:50%;transform:rotate(-31deg);box-shadow:0 0 18px rgba(49,199,255,.15)}
-    .orbit.o2{width:79%;height:108%;border-color:rgba(163,116,255,.53);transform:rotate(39deg)}
-    .orbit.o3{width:118%;height:34%;border-color:rgba(116,137,255,.42);transform:rotate(18deg)}
-    .source-dot{position:absolute;width:11px;height:11px;background:#b5f7ff;border:2px solid #fff;border-radius:50%;top:13%;left:57%;box-shadow:0 0 8px #80edff,0 0 23px #388fff,0 0 48px rgba(123,92,255,.8)}
-    .orb-core{position:relative;width:33%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(170,217,255,.9);background:radial-gradient(circle at 34% 27%,#b4f8ff 0,#5db8ff 9%,#405fe5 32%,#322276 65%,#13182d 100%);box-shadow:0 0 18px rgba(76,209,255,.72),0 0 58px rgba(84,83,255,.56),inset -13px -18px 30px rgba(5,10,32,.65),inset 8px 6px 20px rgba(207,246,255,.55)}
+    .orbit{--tilt:-31deg;position:absolute;width:100%;height:43%;border:1px solid rgba(64,219,246,.72);border-radius:50%;transform:rotate(var(--tilt));box-shadow:0 0 18px rgba(49,199,255,.15);animation:orbit-drift 34s linear infinite;will-change:transform}
+    .orbit.o2{--tilt:39deg;width:79%;height:108%;border-color:rgba(163,116,255,.53);animation-duration:46s;animation-direction:reverse}
+    .orbit.o3{--tilt:18deg;width:118%;height:34%;border-color:rgba(116,137,255,.42);animation-duration:40s}
+    @keyframes orbit-drift{from{transform:rotate(var(--tilt))}to{transform:rotate(calc(var(--tilt) + 360deg))}}
+    .source-dot{position:absolute;width:11px;height:11px;background:#b5f7ff;border:2px solid #fff;border-radius:50%;top:calc(50% - 5.5px);left:calc(50% - 5.5px);box-shadow:0 0 8px #80edff,0 0 23px #388fff,0 0 48px rgba(123,92,255,.8);animation:source-revolve 13s linear infinite;will-change:transform}
+    @keyframes source-revolve{from{transform:rotate(-90deg) translateX(min(42vw,175px))}to{transform:rotate(270deg) translateX(min(42vw,175px))}}
+    .orb-core{position:relative;width:33%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(170,217,255,.9);background:radial-gradient(circle at 34% 27%,#b4f8ff 0,#5db8ff 9%,#405fe5 32%,#322276 65%,#13182d 100%);box-shadow:0 0 18px rgba(76,209,255,.72),0 0 58px rgba(84,83,255,.56),inset -13px -18px 30px rgba(5,10,32,.65),inset 8px 6px 20px rgba(207,246,255,.55);animation:core-breathe 5.5s ease-in-out infinite;will-change:transform,filter}
+    @keyframes core-breathe{0%,100%{transform:scale(1);filter:brightness(1)}50%{transform:scale(1.045);filter:brightness(1.12)}}
     .orb-core:after{content:"";position:absolute;inset:18%;border:1px solid rgba(207,240,255,.57);border-radius:50%;box-shadow:0 0 23px rgba(65,208,255,.35)}
     .orbit-caption{position:absolute;left:0;right:0;bottom:2%;display:flex;justify-content:space-between;color:#9ab5db;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
     .orbit-caption span:nth-child(2){color:#92e8fb}
