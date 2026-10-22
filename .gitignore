@@ -1,0 +1,14 @@
+# .NET build output
+bin/
+obj/
+[Bb]uild-check/
+[Bb]uild-device-fix/
+[Bb]uild-github/
+[Bb]uild-final/
+/portable/
+/publish/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
