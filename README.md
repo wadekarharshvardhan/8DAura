@@ -71,6 +71,13 @@ The output is `publish/8DAura.exe`. The executable can run without installing th
 
 ## Built with
 
+<p>
+  <a href="https://learn.microsoft.com/dotnet/csharp/"><img alt="C#" src="https://img.shields.io/badge/C%23-C%23-68217A?logo=csharp&amp;logoColor=white" /></a>
+  <a href="https://dotnet.microsoft.com/"><img alt=".NET 8" src="https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&amp;logoColor=white" /></a>
+  <a href="https://learn.microsoft.com/dotnet/desktop/wpf/"><img alt="WPF" src="https://img.shields.io/badge/UI-WPF-0078D4?logo=windows&amp;logoColor=white" /></a>
+  <a href="https://github.com/naudio/NAudio"><img alt="NAudio" src="https://img.shields.io/badge/Audio-NAudio-2E7D32" /></a>
+</p>
+
 - C# and WPF on .NET 8
 - NAudio for Windows audio device access and loopback capture
 - WPF-native drawing and animation for the spatial orb and UI visualizations
