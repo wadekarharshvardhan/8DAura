@@ -8,6 +8,10 @@
 
 8D Aura is a Windows desktop application that captures system audio, applies a moving stereo spatial effect, and sends it to a selected playback device. It processes live audio; it does not import or save music files.
 
+## App preview
+
+![8D Aura spatial audio screen](docs/images/8d-aura-spatial-audio.png)
+
 ## Features
 
 - **Spatial field:** move the sound source around the orbit field or set it to rotate continuously.
