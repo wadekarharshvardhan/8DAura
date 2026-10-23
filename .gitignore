@@ -2,6 +2,7 @@
 bin/
 obj/
 [Bb]uild-check/
+/work/media-build/
 [Bb]uild-device-fix/
 [Bb]uild-github/
 [Bb]uild-final/

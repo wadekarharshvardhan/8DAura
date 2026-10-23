@@ -19,14 +19,18 @@
 ## Features
 
 - **Spatial field:** move the sound source around the orbit field or set it to rotate continuously.
+- **Movement patterns:** clockwise and counter-clockwise orbits, front and rear arcs, horizontal sweeps, figure eight, star, parallelogram, rhombus, octagon, and pentagon paths.
 - **Listening profiles:** 360 Surround, Studio Natural, Wide Atmosphere, Deep Orbit, and Vocal Clarity.
 - **Listening spaces:** Headphones, Speakers, Hall, and Auditorium, with adjustable echo and room reverb.
 - **Spatial controls:** effect blend, stereo width, Haas delay and level, orbit speed, and output level.
 - **Equaliser:** quick Bass, Mid, and Treble controls, plus a 10-band advanced EQ with preamp, enable/disable, and reset.
 - **Live feedback:** output peak meter, a level-reactive visual, and a glowing spatial orb that follows the current position and existing output level.
-- **Dark WPF interface:** custom 8D Aura logo and application icon.
+- **Media controls:** show the current title, artist, and player name when Windows exposes them, with play/pause, previous, and next controls when supported by the player.
+- **Compact dark interface:** rounded glass-style transport buttons, responsive sliders, custom 8D Aura logo, and application icon.
 
 The visual trace and bars react to the existing output-level meter. They are not an FFT spectrum display. The spatial effect is a lightweight binaural approximation, not a measured HRTF renderer. Use stereo headphones for the intended movement; results depend on the source, devices, Windows audio configuration, and headphones.
+
+Track details and transport capabilities come from Windows media sessions. Some browsers and players expose only partial metadata or controls, so available actions depend on the active player. 8D Aura does not identify songs by listening to the audio.
 
 ## Requirements
 
@@ -60,14 +64,15 @@ Create a self-contained, single-file x64 executable with:
 ```powershell
 dotnet publish 8DAura.csproj -c Release -r win-x64 --self-contained true `
   -p:PublishSingleFile=true `
-  -p:IncludeAllContentForSelfExtract=true `
   -p:IncludeNativeLibrariesForSelfExtract=true `
   -p:EnableCompressionInSingleFile=true `
+  -p:DebugType=None `
+  -p:DebugSymbols=false `
   -p:PublishTrimmed=false `
-  -o publish
+  -o portable
 ```
 
-The output is `publish/8DAura.exe`. The executable can run without installing the .NET runtime. VB-CABLE remains a separate installation.
+The output is `portable/8DAura.exe`. The self-contained executable can run without installing the .NET runtime. VB-CABLE remains a separate installation.
 
 ## Built with
 
